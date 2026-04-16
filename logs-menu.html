@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Gruyère Station — Log Access Portal</title>
+
+<style>
+  body {
+    background-color: #0000AA; /* C64 blue */
+    color: #FFFFFF;
+    font-family: "Courier New", monospace;
+    margin: 0;
+    padding: 0;
+  }
+
+  .header {
+    background-color: #00008A;
+    padding: 20px;
+    text-align: center;
+    font-size: 2rem;
+    border-bottom: 2px solid #000066;
+  }
+
+  .container {
+    padding: 40px;
+    max-width: 700px;
+    margin: auto;
+  }
+
+  .log-entry {
+    padding: 14px 20px;
+    margin: 12px 0;
+    background-color: #1e3a5f;
+    border: 2px solid #AAB7C4; /* cool gray accent */
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s;
+  }
+
+  .log-entry:hover {
+    background-color: #264b78;
+    border-color: #C7D1DB;
+  }
+
+  .footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 0.8rem;
+    opacity: 0.7;
+  }
+  .return-link {
+    display: block;
+    text-align: center;
+    margin: 30px 0;
+    color: #FFFFFF;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+</style>
+
+<script>
+  function accessRegas() {
+    prompt("ENTER PASSWORD:");
+    window.location.href = "logs.html"; // Her logs page
+  }
+
+  function accessLocked(name) {
+    prompt("ENTER PASSWORD:");
+    alert("ACCESS DENIED.");
+  }
+</script>
+
+</head>
+
+<body>
+
+  <div class="header">
+    GRUYÈRE STATION — LOG ACCESS PORTAL
+  </div>
+
+  <div class="container">
+
+    <div class="log-entry" onclick="accessRegas()">
+      Dr. Elana Regas, H — ACCESSIBLE
+    </div>
+
+    <div class="log-entry" onclick="accessLocked('Head')">
+      Dr. Richard Head, CN — PASSWORD REQUIRED
+    </div>
+
+    <div class="log-entry" onclick="accessLocked('Adams')">
+      Researcher D. Adams, H — PASSWORD REQUIRED
+    </div>
+
+    <div class="log-entry" onclick="accessLocked('Malden')">
+      Dr. Jorik Malden — PASSWORD REQUIRED
+    </div>
+
+    <div class="log-entry" onclick="accessLocked('Station Logs')">
+      Station Logs — PASSWORD REQUIRED
+    </div>
+
+  </div>
+ <a class="return-link" href="station-terminal.html">RETURN TO STATION MENU</a>
+
+  <div class="footer">
+    Unauthorized access is a violation of Triad Research Protocol 7‑C
+  </div>
+
+</body>
+</html>

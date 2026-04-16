@@ -1,0 +1,145 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="-150 -150 300 300"
+     width="500" height="500">
+
+  <!-- =========================
+       CONFIG
+       ========================= -->
+  <style>
+    :root {
+      --gold: #D4AF37;
+      --stroke: #D4AF37;
+      --bg: transparent;
+    }
+
+    .ring {
+      fill: var(--bg);
+      stroke: var(--stroke);
+      stroke-width: 6;
+    }
+
+    .seal-text {
+      fill: var(--gold);
+      font-family: "Times New Roman", serif;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-anchor: middle;
+    }
+  </style>
+
+  <!-- =========================
+       GUIDE RINGS (optional)
+       ========================= -->
+  <circle cx="0" cy="0" r="140" class="ring" />
+  <circle cx="0" cy="0" r="105" class="ring" />
+
+<!--  INNER PARTIAL CIRCLE  -->
+
+
+
+<path id="innerPartial"
+      d="
+        M -53.6 45.0
+        A 70 70 0 1 1 53.6 45.0
+      "
+      stroke="#D4AF37"
+      stroke-width="4"
+      stroke-linecap="round"
+      fill="none" />
+
+<path
+  d="M -50 47.0 L 50 47.0"
+  stroke="#D4AF37"
+  stroke-width="4"
+  fill="none" />
+
+
+<text x="0" y="67"
+      class="seal-text"
+      font-size="22"
+      font-weight="700"
+      text-anchor="middle">
+  REGULA
+</text>
+
+
+
+<path
+  d="M -50 73.0 L 50 73.0"
+  stroke="#D4AF37"
+  stroke-width="4"
+  fill="none" />
+
+
+
+
+
+  <!-- =========================
+       PATHS
+       ========================= -->
+  <defs>
+    <!-- TOP ARC -->
+    <path id="topArc"
+          d="M -115 0
+             A 115 115 0 0 1 115 0" />
+
+    <!-- BOTTOM ARC -->
+    <path id="bottomArc"
+          d="M 115 0
+             A 115 115 0 0 1 -115 0" />
+
+
+    <!-- Inner Latin arc (smaller radius = more curve) -->
+
+<path id="latinArc"
+      d="
+        M -78 40
+        A 87 87 0 1 1 78 40
+      " />
+
+
+  </defs>
+
+  <!-- =========================
+       TOP TEXT
+       ========================= -->
+  <text class="seal-text" font-size="18">
+    <textPath href="#topArc" startOffset="50%">
+      * REGISTRY OF SENTIENT BEINGS *
+    </textPath>
+  </text>
+
+  <!-- =========================
+       BOTTOM TEXT
+       ========================= -->
+  <text class="seal-text" font-size="18">
+    <textPath href="#bottomArc" startOffset="50%">
+      CENTRAL ORGANIZED GOVERNMENT
+    </textPath>
+  </text>
+  <!-- =========================
+       INNER LATIN TEXT
+       ========================= -->
+<text class="seal-text"
+      font-size="18"
+      textLength="320"
+      lengthAdjust="spacing">
+  <textPath href="#latinArc" startOffset="50%">
+    DECIDIMUS VOS EXISTITIS
+  </textPath>
+</text>
+
+<!-- ===========================
+       BIG ASS R
+     =========================== -->
+<text x="0" y="35"
+      class="seal-text"
+      font-size="120"
+      font-weight="700"
+      text-anchor="middle">
+  R
+</text>
+
+
+
+</svg>

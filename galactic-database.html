@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Galactic Database</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+
+<style>
+/* ---------------------------------------
+   GLOBAL LAYOUT + BASE STYLES
+--------------------------------------- */
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #05070b;
+  color: #e5e7eb;
+}
+
+.page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+
+/* ---------------------------------------
+   MAP SECTION
+--------------------------------------- */
+
+#map-container {
+  width: 100%;
+  height: 320px;
+  background: radial-gradient(circle at top, #1f2933, #020308);
+  border: 1px solid #111827;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.85rem;
+}
+
+
+/* ---------------------------------------
+   SEARCH BAR + SUGGESTIONS
+--------------------------------------- */
+
+#search-section {
+  margin: 16px 0 24px 0;
+  position: relative;
+}
+
+#system-search {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 1rem;
+  border-radius: 4px;
+  border: 1px solid #374151;
+  background: #020617;
+  color: #e5e7eb;
+  box-sizing: border-box;
+}
+
+#search-suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #020617;
+  border: 1px solid #374151;
+  border-top: none;
+  max-height: 200px;
+  overflow-y: auto;
+  display: none;
+  z-index: 10;
+
+  /* IMPORTANT: prevent invisible overlay blocking clicks */
+  pointer-events: none;
+}
+
+.suggestion-item {
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.suggestion-item:hover {
+  background: #111827;
+}
+
+
+/* ---------------------------------------
+   INFO PANELS
+--------------------------------------- */
+
+#info-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+#system-diagram,
+#system-summary {
+  border: 1px solid #111827;
+  background: #020617;
+  padding: 12px 14px;
+  box-sizing: border-box;
+  min-height: 220px;
+}
+
+#system-diagram-title,
+#system-summary-title {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: #9ca3af;
+  margin-bottom: 8px;
+}
+
+
+/* ---------------------------------------
+   SYSTEM DIAGRAM CANVAS
+--------------------------------------- */
+
+#system-diagram-canvas {
+  white-space: pre;
+  border: 1px dashed #1f2937;
+  padding: 12px;
+  min-height: 180px;
+  color: #4b5563;
+  font-size: 0.85rem;
+}
+
+#system-diagram-canvas span {
+  display: inline-block;
+  margin: 0 2px;
+}
+
+#system-diagram, #system-diagram-canvas {
+  overflow: visible !important;
+}
+
+
+/* ---------------------------------------
+   SYSTEM SUMMARY PANEL
+--------------------------------------- */
+
+#system-summary-content {
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+
+/* ---------------------------------------
+   OPEN FULL ENTRY BUTTON
+--------------------------------------- */
+
+#open-entry-btn {
+  margin-top: 12px;
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  border-radius: 4px;
+  border: 1px solid #4b5563;
+  background: #111827;
+  color: #e5e7eb;
+  cursor: pointer;
+}
+
+#open-entry-btn:hover {
+  background: #1f2937;
+}
+
+
+/* ---------------------------------------
+   TOOLTIP
+--------------------------------------- */
+
+#tooltip {
+  position: fixed;
+  background: rgba(0, 0, 0, 0.85);
+  color: #9fdcff;
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  z-index: 9999999;
+  border: 1px solid #1e90ff55;
+  box-shadow: 0 0 6px #1e90ff55;
+}
+
+
+/* ---------------------------------------
+   RESPONSIVE
+--------------------------------------- */
+
+@media (max-width: 800px) {
+  #info-section {
+    grid-template-columns: 1fr;
+  }
+}
+/*----------------------------------------
+    INTERACTIVE MAP
+-----------------------------------------*/
+#map-frame {
+    width: 100%;
+    height: 60vh;
+    overflow: hidden;   /* critical */
+    position: relative;
+    background: black;
+}
+
+
+/* This defines the ABSOLUTE size of the map */
+#map-viewport {
+    width: 800px;
+    height: 800px;
+    overflow: hidden;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* centers the map */
+}
+
+
+#tempes-map {
+    width: 800px;
+    height: 800px;
+    transform-origin: 50% 50%;
+    display: block;
+    overflow: visible;
+}
+
+.system-node:hover circle {
+  stroke: #00eaff;
+  stroke-width: 2px;
+}
+
+.system-node.selected circle {
+  stroke: #00eaff;
+  stroke-width: 3px;
+  filter: drop-shadow(0 0 4px #00eaff);
+}
+
+
+.corridor-node text {
+  pointer-events: visiblePainted;
+  cursor: pointer;
+}
+
+
+.corridor-node.selected text {
+  fill: #00eaff;
+  filter: drop-shadow(0 0 4px #00eaff);
+}
+
+.corridor-node text:hover {
+  fill: #00eaff;
+}
+
+
+    
+
+</style>
+</head>
+<body>
+    
+  <div id="tooltip"></div>
+
+
+        
+  <div class="page">
+
+<!-- FULL-WIDTH GALACTIC MAP -->
+<div id="map-frame">
+    <div id="map-viewport">
+       <svg id="tempes-map" viewBox="0 0 800 800">
+  <rect x="0" y="0" width="100%" height="100%" fill="#001833" />
+<image
+  href="GALBG.jpg"
+  x="0"
+  y="0"
+  width="800"
+  height="800"
+/>
+  <!-- Grid lines -->
+  <g stroke="#444" stroke-width="1" opacity="0.5">
+    <!-- Vertical -->
+    <line x1="200" y1="200" x2="200" y2="600" />
+    <line x1="220" y1="200" x2="220" y2="600" />
+    <line x1="240" y1="200" x2="240" y2="600" />
+    <line x1="260" y1="200" x2="260" y2="600" />
+    <line x1="280" y1="200" x2="280" y2="600" />
+    <line x1="300" y1="200" x2="300" y2="600" />
+    <line x1="320" y1="200" x2="320" y2="600" />
+    <line x1="340" y1="200" x2="340" y2="600" />
+    <line x1="360" y1="200" x2="360" y2="600" />
+    <line x1="380" y1="200" x2="380" y2="600" />
+    <line x1="400" y1="200" x2="400" y2="600" />
+    <line x1="420" y1="200" x2="420" y2="600" />
+    <line x1="440" y1="200" x2="440" y2="600" />
+    <line x1="460" y1="200" x2="460" y2="600" />
+    <line x1="480" y1="200" x2="480" y2="600" />
+    <line x1="500" y1="200" x2="500" y2="600" />
+    <line x1="520" y1="200" x2="520" y2="600" />
+    <line x1="540" y1="200" x2="540" y2="600" />
+    <line x1="560" y1="200" x2="560" y2="600" />
+    <line x1="580" y1="200" x2="580" y2="600" />
+    <line x1="600" y1="200" x2="600" y2="600" />
+
+    <!-- Horizontal -->
+    <line x1="200" y1="600" x2="600" y2="600" />
+    <line x1="200" y1="580" x2="600" y2="580" />
+    <line x1="200" y1="560" x2="600" y2="560" />
+    <line x1="200" y1="540" x2="600" y2="540" />
+    <line x1="200" y1="520" x2="600" y2="520" />
+    <line x1="200" y1="500" x2="600" y2="500" />
+    <line x1="200" y1="480" x2="600" y2="480" />
+    <line x1="200" y1="460" x2="600" y2="460" />
+    <line x1="200" y1="440" x2="600" y2="440" />
+    <line x1="200" y1="420" x2="600" y2="420" />
+    <line x1="200" y1="400" x2="600" y2="400" />
+    <line x1="200" y1="380" x2="600" y2="380" />
+    <line x1="200" y1="360" x2="600" y2="360" />
+    <line x1="200" y1="340" x2="600" y2="340" />
+    <line x1="200" y1="320" x2="600" y2="320" />
+    <line x1="200" y1="300" x2="600" y2="300" />
+    <line x1="200" y1="280" x2="600" y2="280" />
+    <line x1="200" y1="260" x2="600" y2="260" />
+    <line x1="200" y1="240" x2="600" y2="240" />
+    <line x1="200" y1="220" x2="600" y2="220" />
+    <line x1="200" y1="200" x2="600" y2="200" />
+  </g>
+
+  <!-- Axes -->
+  <g stroke="#777" stroke-width="2">
+    <line x1="200" y1="400" x2="600" y2="400" />
+    <line x1="400" y1="200" x2="400" y2="600" />
+  </g>
+
+
+
+  <!-- Hazard Region -->
+  <path
+    d="M 300 250 C 320 250, 330 255, 332 265 C 334 280, 334 290, 334 295
+       C 326 310, 320 318, 318 320 C 314 338, 308 348, 304 352
+       C 292 372, 276 385, 260 385 C 244 385, 236 370, 238 352
+       C 236 335, 236 323, 242 315 C 248 295, 255 280, 260 272
+       C 272 258, 288 248, 300 250 Z"
+    fill="#4fa64f"
+    fill-opacity="0.4"
+    stroke="none"
+    pointer-events="none"
+  />
+
+  <text
+    x="280"
+    y="310"
+    text-anchor="middle"
+    dominant-baseline="middle"
+    font-family="Inter, sans-serif"
+    font-size="10"
+    fill="#cfe8cf"
+    opacity="0.9"
+    stroke="#000000"
+    stroke-width="3"
+    paint-order="stroke">
+    The Heavy Flux
+  </text>
+
+<!-- Corridor Labels -->
+<g id="ZenithCorridor" class="corridor-node">
+  <text x="390" y="265" text-anchor="middle"
+        fill="#ffffff" font-size="12"
+        stroke="#000000" stroke-width="3" paint-order="stroke">
+    Zenith Corridor
+  </text>
+</g>
+
+<g id="TriadArcway" class="corridor-node">
+  <text x="540" y="410" text-anchor="middle"
+        fill="#ffffff" font-size="12"
+        stroke="#000000" stroke-width="3" paint-order="stroke">
+    Triad Arcway
+  </text>
+</g>
+
+<g id="ArgentumSpur" class="corridor-node">
+  <text x="450" y="570" text-anchor="middle"
+        fill="#ffffff" font-size="12"
+        stroke="#000000" stroke-width="3" paint-order="stroke">
+    Argentum Spur
+  </text>
+</g>
+
+<g id="HygeniumDescent" class="corridor-node">
+  <text x="335" y="535" text-anchor="middle"
+        fill="#ffffff" font-size="12"
+        stroke="#000000" stroke-width="3" paint-order="stroke">
+    Hygenium Descent
+  </text>
+</g>
+
+<g id="RegulaBypass" class="corridor-node">
+  <text x="400" y="445" text-anchor="middle"
+        fill="#ffffff" font-size="8"
+        stroke="#000000" stroke-width="3" paint-order="stroke">
+    Regula Bypass
+  </text>
+</g>
+
+<g id="BralLine" class="corridor-node">
+  <text x="390" y="410" text-anchor="end"
+        fill="#ffffff" font-size="8"
+        stroke="#000000" stroke-width="3" paint-order="stroke">
+    Bral Line
+  </text>
+</g>
+  <!-- Corridors -->
+  <g fill="none" stroke="#ffffff" stroke-width="2">
+    <path d="M 440 260 C 480 320 380 240 360 300" />
+    <line x1="360" y1="300" x2="320" y2="320" />
+    <path d="M 360 380 C 350 410 350 410 360 440 S 370 470 360 480" />
+    <path d="M 360 440 C 380 420 420 420 440 460" />
+    <path d="M 440 460 C 500 520, 560 470, 590 400 C 610 350, 560 330, 540 315 C 530 308, 525 304, 520 300" />
+    <path d="M 440 460 C 430 500 425 530 420 560" />
+    <path d="M 320 520 C 330 540 350 500 360 480" />
+  </g>
+
+  <!-- A-Z Industries -->
+  <g id="AZINDUSTRIES" class="system-node">
+    <circle  cx="300" cy="400" r="25" fill="black" />
+    <text x="300" y="395" fill="#ffffff" font-size="10" text-anchor="middle"
+      stroke="#000000" stroke-width="3" paint-order="stroke">A‑Z</text>
+    <text x="300" y="410" fill="#ffffff" font-size="10" text-anchor="middle"
+      stroke="#000000" stroke-width="3" paint-order="stroke">Industries</text>
+  </g>
+
+  <!-- Xyraxis -->
+  <g id="Xyraxis" class="system-node">
+    <circle cx="460" cy="320" r="18" fill="black" />
+    <circle cx="460" cy="320" r="24" fill="none" stroke="#555" stroke-width="3" />
+    <text x="460" y="323" fill="#ffffff" font-size="10" text-anchor="middle"
+      stroke="#000000" stroke-width="3" paint-order="stroke">Xyraxis</text>
+  </g>
+
+  <!-- Systems -->
+  <g id="Plumbia" class="system-node">
+    <circle cx="300" cy="280" r="6" fill="#9fb3c8" />
+    <text x="300" y="268" fill="#ffffff" font-size="12" text-anchor="middle"
+      stroke="#000000" stroke-width="3" paint-order="stroke">Plumbia</text>
+      </g>
+
+  <g id="Cuprum" class="system-node">
+    <circle cx="260" cy="360" r="6" fill="#c47a3c" />
+    <text x="260" y="348" fill="#ffffff" font-size="12" text-anchor="middle"
+      stroke="#000000" stroke-width="3" paint-order="stroke">Cuprum</text>
+</g>
+
+  <g id="Natrium" class="system-node">
+    <circle cx="360" cy="340" r="6" fill="#b0b0b0" />
+    <text x="360" y="328" fill="#ffffff" font-size="12" text-anchor="middle"
+      stroke="#000000" stroke-width="3" paint-order="stroke">Natrium</text>
+</g>
+
+  <g id="Hygenium" class="system-node">
+    <circle cx="260" cy="500" r="6" fill="#6fbf6f" />
+    <text x="260" y="488" fill="#ffffff" font-size="12" text-anchor="middle"
+      stroke="#000000" stroke-width="3" paint-order="stroke">Hygenium</text>
+</g>
+
+  <g id="RockOfBral" class="system-node">
+    <circle cx="360" cy="480" r="6" fill="#888888" />
+    <text x="360" y="498" fill="#ffffff" font-size="12" text-anchor="middle"
+      stroke="#000000" stroke-width="3" paint-order="stroke">Rock of Bral</text>
+</g>
+
+  <g id="Regula" class="system-node">
+    <circle cx="440" cy="440" r="6" fill="#4fa0c8" />
+    <text x="440" y="428" fill="#ffffff" font-size="12" text-anchor="middle"
+      stroke="#000000" stroke-width="3" paint-order="stroke">Regula</text>
+</g>
+
+  <g id="Argentum" class="system-node">
+    <circle cx="500" cy="540" r="6" fill="#d0d0d0" />
+    <text x="500" y="528" fill="#ffffff" font-size="12" text-anchor="middle"
+      stroke="#000000" stroke-width="3" paint-order="stroke">Argentum</text>
+</g>
+
+  <g id="Kalium" class="system-node">
+    <circle cx="520" cy="340" r="6" fill="#f0d060" />
+    <text x="520" y="328" fill="#ffffff" font-size="12" text-anchor="middle"
+      stroke="#000000" stroke-width="3" paint-order="stroke">Kalium</text>
+</g>
+
+  <g id="Aurum" class="system-node">
+    <circle cx="480" cy="240" r="6" fill="#f5d76e" />
+    <text x="480" y="228" fill="#ffffff" font-size="12" text-anchor="middle"
+      stroke="#000000" stroke-width="3" paint-order="stroke">Aurum</text>
+</g>
+
+  <g id="Oganesson" class="system-node">
+    <circle cx="540" cy="260" r="6" fill="#a0a0ff" />
+    <text x="540" y="248" fill="#ffffff" font-size="12" text-anchor="middle"
+      stroke="#000000" stroke-width="3" paint-order="stroke">Oganesson</text>
+</g>
+
+  <g id="Ferron" class="system-node">
+    <circle cx="480" cy="470" r="6" fill="#B7410E" />
+    <text x="480" y="460" fill="#ffffff" font-size="12" text-anchor="middle"
+      stroke="#000000" stroke-width="3" paint-order="stroke">Ferron</text>
+
+  </g>
+
+</svg>
+</div>
+</div>
+
+
+    <!-- PREDICTIVE SEARCH BAR -->
+    <section id="search-section">
+      <input
+        type="text"
+        id="system-search"
+        placeholder="Search galactic points...."
+        autocomplete="off"
+      />
+      <div id="search-suggestions">
+        <!-- JS will populate suggestion items here -->
+      </div>
+    </section>
+
+    <!-- TWO INFO PANELS -->
+    <section id="info-section">
+      <!-- LEFT: SYSTEM DIAGRAM -->
+      <div id="system-diagram">
+        <div id="system-diagram-title">System Layout</div>
+        <div id="system-diagram-canvas">
+          <!-- Later: symbolic star–planet–belt–gas giant diagram -->
+          No system selected.
+        </div>
+      </div>
+
+      <!-- RIGHT: SYSTEM SUMMARY -->
+      <div id="system-summary">
+        <div id="system-summary-title">System Summary</div>
+        <div id="system-summary-content">
+          Select a system from the map or search bar to view brief information:
+          <ul>
+            <li>Habitable planets</li>
+            <li>Potential hazards</li>
+            <li>Stations / settlements</li>
+            <li>Faction presence</li>
+          </ul>
+        </div>
+        <button id="open-entry-btn">
+          Open Full Entry
+        </button>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Placeholder for future JavaScript (search, map hooks, etc.) -->
+  <script>
+    // Later:
+    // - Load system list
+    // - Implement predictive search
+    // - Wire selection to update diagram + summary
+    // - Connect map clicks to the same selection logic
+  </script>
+  <script src="systems.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

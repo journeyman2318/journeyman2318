@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Gruyère Station — Controls</title>
+
+<style>
+  body {
+    background-color: #0000AA; /* C64 blue */
+    color: #FFFFFF;
+    font-family: "Courier New", monospace;
+    margin: 0;
+    padding: 0;
+  }
+
+  .header {
+    background-color: #00008A;
+    padding: 20px;
+    text-align: center;
+    font-size: 2rem;
+    border-bottom: 2px solid #000066;
+  }
+
+  .container {
+    padding: 30px;
+    max-width: 900px;
+    margin: auto;
+  }
+
+  pre {
+    background-color: #1e3a5f;
+    border: 2px solid #AAB7C4;
+    border-radius: 6px;
+    padding: 20px;
+    white-space: pre;
+    overflow-x: auto;
+    font-size: 1rem;
+    line-height: 1.4rem;
+  }
+
+  .button {
+    display: block;
+    width: 200px;
+    margin: 25px auto;
+    padding: 15px;
+    text-align: center;
+    background-color: #264b78;
+    border: 2px solid #AAB7C4;
+    border-radius: 6px;
+    color: #FFFFFF;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.2s, border-color 0.2s;
+  }
+
+  .button:hover {
+    background-color: #3b6a9c;
+    border-color: #C7D1DB;
+  }
+
+  .footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 0.8rem;
+    opacity: 0.7;
+  }
+.blink {
+  animation: blink 1s step-start infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+</style>
+
+<script>
+function toggleLifeSupport() {
+  const lvl6 = document.getElementById("lvl6-status");
+  const msg = document.getElementById("scoti-msg");
+
+  // STEP 1 — Immediately show WAIT and blink
+  lvl6.textContent = "WAIT   ";
+  lvl6.classList.add("blink");
+
+  // STEP 2 — After 2 seconds, show SCOTI message
+  setTimeout(() => {
+    msg.style.display = "block";
+
+    // STEP 3 — After another 2 seconds, flip to ONLINE
+    setTimeout(() => {
+      lvl6.textContent = "ONLINE ";
+      // blink class already applied, so it keeps blinking
+    }, 2000);
+
+  }, 2000);
+}
+
+
+
+
+</script>
+
+</head>
+
+<body>
+
+  <div class="header">
+    GRUYÈRE STATION — SYSTEM CONTROLS
+  </div>
+
+  <div class="container">
+
+<pre>
+                 ┌──────────────────────────┐
+                 │        LEVEL 1           │
+                 │       COMMS ARRAY        │
+                 │   LIFE SUPPORT: OFFLINE  │
+                 └────────────┬─────────────┘
+                              │
+                 ┌────────────┴────────────┐
+                 │        LEVEL 2          │
+                 │  MAIN BRIDGE & DOCKING  │
+                 │   LIFE SUPPORT: ONLINE  │
+                 └────────────┬────────────┘
+                              │
+                 ┌────────────┴────────────┐
+                 │        LEVEL 3          │
+                 │       HABITATION        │
+                 │   LIFE SUPPORT: OFFLINE │
+                 └────────────┬────────────┘
+                              │
+                 ┌────────────┴────────────┐
+                 │        LEVEL 4          │
+                 │  PRIMARY RESEARCH LEVEL │
+                 │   LIFE SUPPORT: OFFLINE │
+                 └────────────┬────────────┘
+                              │
+                 ┌────────────┴────────────┐
+                 │        LEVEL 5          │
+                 │  AI SYSTEMS & CORE NODE │
+                 │   LIFE SUPPORT: OFFLINE │
+                 └────────────┬────────────┘
+                              │
+                 ┌────────────┴─────────────┐
+                 │        LEVEL 6           │
+                 │ SPATIAL FLEXURE GENERATOR│
+                 │   LIFE SUPPORT: <span id="lvl6-status">OFFLINE</span>  │
+                 └──────────────────────────┘
+
+
+</pre>
+
+<div id="scoti-msg" style="display:none; margin-top:20px; background-color:#1e3a5f; border:2px solid #AAB7C4; padding:15px; border-radius:6px;">
+  <div>⚠ SYSTEM NOTICE:</div>
+  <div>Insufficient Power to Restore Life Support to All Levels.</div>
+  <div>SCOTI Directive: Prioritizing Level 6 Life Support Restoration.</div>
+</div>
+
+    <div class="button" onclick="toggleLifeSupport()">
+      LIFE SUPPORT
+    </div>
+
+    <a class="button" href="station-terminal.html">
+      RETURN TO TERMINAL
+    </a>
+
+  </div>
+
+  <div class="footer">
+    Unauthorized system manipulation violates Triad Protocol 7‑C
+  </div>
+
+</body>
+</html>

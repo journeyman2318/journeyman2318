@@ -1,0 +1,192 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="800" viewBox="0 0 800 800">
+  <rect x="0" y="0" width="100%" height="100%" fill="#001833" />
+<image
+  href="GALBG.jpg"
+  x="0"
+  y="0"
+  width="800"
+  height="800"
+/>
+  <!-- Grid lines -->
+  <g stroke="#444" stroke-width="1" opacity="0.5">
+    <!-- Vertical -->
+    <line x1="200" y1="200" x2="200" y2="600" />
+    <line x1="220" y1="200" x2="220" y2="600" />
+    <line x1="240" y1="200" x2="240" y2="600" />
+    <line x1="260" y1="200" x2="260" y2="600" />
+    <line x1="280" y1="200" x2="280" y2="600" />
+    <line x1="300" y1="200" x2="300" y2="600" />
+    <line x1="320" y1="200" x2="320" y2="600" />
+    <line x1="340" y1="200" x2="340" y2="600" />
+    <line x1="360" y1="200" x2="360" y2="600" />
+    <line x1="380" y1="200" x2="380" y2="600" />
+    <line x1="400" y1="200" x2="400" y2="600" />
+    <line x1="420" y1="200" x2="420" y2="600" />
+    <line x1="440" y1="200" x2="440" y2="600" />
+    <line x1="460" y1="200" x2="460" y2="600" />
+    <line x1="480" y1="200" x2="480" y2="600" />
+    <line x1="500" y1="200" x2="500" y2="600" />
+    <line x1="520" y1="200" x2="520" y2="600" />
+    <line x1="540" y1="200" x2="540" y2="600" />
+    <line x1="560" y1="200" x2="560" y2="600" />
+    <line x1="580" y1="200" x2="580" y2="600" />
+    <line x1="600" y1="200" x2="600" y2="600" />
+
+    <!-- Horizontal -->
+    <line x1="200" y1="600" x2="600" y2="600" />
+    <line x1="200" y1="580" x2="600" y2="580" />
+    <line x1="200" y1="560" x2="600" y2="560" />
+    <line x1="200" y1="540" x2="600" y2="540" />
+    <line x1="200" y1="520" x2="600" y2="520" />
+    <line x1="200" y1="500" x2="600" y2="500" />
+    <line x1="200" y1="480" x2="600" y2="480" />
+    <line x1="200" y1="460" x2="600" y2="460" />
+    <line x1="200" y1="440" x2="600" y2="440" />
+    <line x1="200" y1="420" x2="600" y2="420" />
+    <line x1="200" y1="400" x2="600" y2="400" />
+    <line x1="200" y1="380" x2="600" y2="380" />
+    <line x1="200" y1="360" x2="600" y2="360" />
+    <line x1="200" y1="340" x2="600" y2="340" />
+    <line x1="200" y1="320" x2="600" y2="320" />
+    <line x1="200" y1="300" x2="600" y2="300" />
+    <line x1="200" y1="280" x2="600" y2="280" />
+    <line x1="200" y1="260" x2="600" y2="260" />
+    <line x1="200" y1="240" x2="600" y2="240" />
+    <line x1="200" y1="220" x2="600" y2="220" />
+    <line x1="200" y1="200" x2="600" y2="200" />
+  </g>
+
+  <!-- Axes -->
+  <g stroke="#777" stroke-width="2">
+    <line x1="200" y1="400" x2="600" y2="400" />
+    <line x1="400" y1="200" x2="400" y2="600" />
+  </g>
+
+  <!-- Corridors -->
+  <g fill="none" stroke="#ffffff" stroke-width="2">
+    <path d="M 440 260 C 480 320 380 240 360 300" />
+    <line x1="360" y1="300" x2="320" y2="320" />
+    <path d="M 360 380 C 350 410 350 410 360 440 S 370 470 360 480" />
+    <path d="M 360 440 C 380 420 420 420 440 460" />
+    <path d="M 440 460 C 500 520, 560 470, 590 400 C 610 350, 560 330, 540 315 C 530 308, 525 304, 520 300" />
+    <path d="M 440 460 C 430 500 425 530 420 560" />
+    <path d="M 320 520 C 330 540 350 500 360 480" />
+  </g>
+
+  <!-- A-Z Industries -->
+  <g>
+    <circle cx="300" cy="400" r="25" fill="black" />
+    <text x="300" y="395" fill="#ffffff" font-size="10" text-anchor="middle"
+      stroke="#000000" stroke-width="3" paint-order="stroke">A‑Z</text>
+    <text x="300" y="410" fill="#ffffff" font-size="10" text-anchor="middle"
+      stroke="#000000" stroke-width="3" paint-order="stroke">Industries</text>
+  </g>
+
+  <!-- Xyraxis -->
+  <g>
+    <circle cx="460" cy="320" r="18" fill="black" />
+    <circle cx="460" cy="320" r="24" fill="none" stroke="#555" stroke-width="3" />
+    <text x="460" y="323" fill="#ffffff" font-size="10" text-anchor="middle"
+      stroke="#000000" stroke-width="3" paint-order="stroke">Xyraxis</text>
+  </g>
+
+  <!-- Systems -->
+  <g>
+    <circle cx="300" cy="280" r="6" fill="#9fb3c8" />
+    <text x="300" y="268" fill="#ffffff" font-size="12" text-anchor="middle"
+      stroke="#000000" stroke-width="3" paint-order="stroke">Plumbia</text>
+
+    <circle cx="260" cy="360" r="6" fill="#c47a3c" />
+    <text x="260" y="348" fill="#ffffff" font-size="12" text-anchor="middle"
+      stroke="#000000" stroke-width="3" paint-order="stroke">Cuprum</text>
+
+    <circle cx="360" cy="340" r="6" fill="#b0b0b0" />
+    <text x="360" y="328" fill="#ffffff" font-size="12" text-anchor="middle"
+      stroke="#000000" stroke-width="3" paint-order="stroke">Natrium</text>
+
+    <circle cx="260" cy="500" r="6" fill="#6fbf6f" />
+    <text x="260" y="488" fill="#ffffff" font-size="12" text-anchor="middle"
+      stroke="#000000" stroke-width="3" paint-order="stroke">Hygenium</text>
+
+    <circle cx="360" cy="480" r="6" fill="#888888" />
+    <text x="360" y="498" fill="#ffffff" font-size="12" text-anchor="middle"
+      stroke="#000000" stroke-width="3" paint-order="stroke">Rock of Bral</text>
+
+    <circle cx="440" cy="440" r="6" fill="#4fa0c8" />
+    <text x="440" y="428" fill="#ffffff" font-size="12" text-anchor="middle"
+      stroke="#000000" stroke-width="3" paint-order="stroke">Regula</text>
+
+    <circle cx="500" cy="540" r="6" fill="#d0d0d0" />
+    <text x="500" y="528" fill="#ffffff" font-size="12" text-anchor="middle"
+      stroke="#000000" stroke-width="3" paint-order="stroke">Argentum</text>
+
+    <circle cx="520" cy="340" r="6" fill="#f0d060" />
+    <text x="520" y="328" fill="#ffffff" font-size="12" text-anchor="middle"
+      stroke="#000000" stroke-width="3" paint-order="stroke">Kalium</text>
+
+    <circle cx="480" cy="240" r="6" fill="#f5d76e" />
+    <text x="480" y="228" fill="#ffffff" font-size="12" text-anchor="middle"
+      stroke="#000000" stroke-width="3" paint-order="stroke">Aurum</text>
+
+    <circle cx="540" cy="260" r="6" fill="#a0a0ff" />
+    <text x="540" y="248" fill="#ffffff" font-size="12" text-anchor="middle"
+      stroke="#000000" stroke-width="3" paint-order="stroke">Oganesson</text>
+
+    <circle cx="480" cy="470" r="6" fill="#B7410E" />
+    <text x="480" y="460" fill="#ffffff" font-size="12" text-anchor="middle"
+      stroke="#000000" stroke-width="3" paint-order="stroke">Ferron</text>
+
+  </g>
+
+  <!-- Hazard Region -->
+  <path
+    d="M 300 250 C 320 250, 330 255, 332 265 C 334 280, 334 290, 334 295
+       C 326 310, 320 318, 318 320 C 314 338, 308 348, 304 352
+       C 292 372, 276 385, 260 385 C 244 385, 236 370, 238 352
+       C 236 335, 236 323, 242 315 C 248 295, 255 280, 260 272
+       C 272 258, 288 248, 300 250 Z"
+    fill="#4fa64f"
+    fill-opacity="0.4"
+    stroke="none"
+  />
+
+  <text
+    x="280"
+    y="310"
+    text-anchor="middle"
+    dominant-baseline="middle"
+    font-family="Inter, sans-serif"
+    font-size="10"
+    fill="#cfe8cf"
+    opacity="0.9"
+    stroke="#000000"
+    stroke-width="3"
+    paint-order="stroke"
+  >
+    The Heavy Flux
+  </text>
+
+  <!-- Corridor Labels -->
+  <g fill="#ffffff" font-size="12">
+    <text x="390" y="265" text-anchor="middle"
+      stroke="#000000" stroke-width="3" paint-order="stroke">Zenith Corridor</text>
+
+    <text x="540" y="410" text-anchor="middle"
+      stroke="#000000" stroke-width="3" paint-order="stroke">Triad Arcway</text>
+
+    <text x="450" y="570" text-anchor="middle"
+      stroke="#000000" stroke-width="3" paint-order="stroke">Argentum Spur</text>
+
+    <text x="335" y="535" text-anchor="middle"
+      stroke="#000000" stroke-width="3" paint-order="stroke">Hygenium Descent</text>
+  </g>
+
+  <g fill="#ffffff" font-size="08">
+    <text x="400" y="445" text-anchor="middle"
+      stroke="#000000" stroke-width="3" paint-order="stroke">Regula Bypass</text>
+
+    <text x="390" y="410" text-anchor="end"
+      stroke="#000000" stroke-width="3" paint-order="stroke">Bral Line</text>
+  </g>
+
+</svg>

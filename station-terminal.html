@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Gruyère Station Terminal #17</title>
+
+<style>
+  body {
+    background-color: #0000AA; /* calm blue */
+    color: #ffffff;
+    font-family: "Courier New", monospace;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Header bar */
+  .header {
+    background-color: #AAB7C4;
+    padding: 20px;
+    text-align: center;
+    font-size: 3.4rem;
+    letter-spacing: 1px;
+    border-bottom: 2px solid #0f2035;
+  }
+
+  /* Center container */
+  .center {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* Button row */
+  .button-row {
+    display: flex;
+    gap: 40px;
+  }
+
+  .menu-button {
+    background-color: #AAB7C4;
+    border: 2px solid #3b6a9c;
+    color: #ffffff;
+    padding: 20px 30px;
+    font-size: 1.1rem;
+    text-decoration: none;
+    border-radius: 6px;
+    width: 220px;
+    text-align: center;
+    transition: background-color 0.2s, border-color 0.2s;
+  }
+
+  .menu-button:hover {
+    background-color: #3b6a9c;
+    border-color: #5a8ac0;
+  }
+  .return-link {
+    display: block;
+    text-align: center;
+    margin: 30px 0;
+    color: #FFFFFF;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 10px;
+    font-size: 0.8rem;
+    opacity: 0.7;
+  }
+</style>
+
+<script>
+  function openDatabase() {
+    window.location.href = "galactic-database.html";
+  }
+
+function openStationControls() {
+  const code = prompt("ENTER AUTHORIZATION CODE:");
+
+  // This is the password SCOTI gives them
+  if (code === "drowssap") {
+    window.location.href = "station-controls.html";
+  } else {
+    alert("ACCESS DENIED.");
+  }
+}
+
+
+  function openLogs() {
+    prompt("ENTER PASSWORD:");
+
+    // Anything works — this is just to tease them
+    window.location.href = "logs-menu.html";
+  }
+</script>
+
+</head>
+
+<body>
+
+  <div class="header">
+    Gruyère Station Terminal #17
+  </div>
+
+  <div class="center">
+    <div class="button-row">
+
+      <a class="menu-button" href="#" onclick="openDatabase()">
+        Galactic Database
+      </a>
+
+      <a class="menu-button" href="#" onclick="openStationControls()">
+        Station Controls
+      </a>
+
+      <a class="menu-button" href="#" onclick="openLogs()">
+        Station Logs
+      </a>
+
+    </div>
+  </div>
+
+  <div class="footer">
+    Research Access Tier 2 • Oganesson System and A-Z Industries
+  </div>
+
+</body>
+</html>
