@@ -93,7 +93,19 @@ const systems = {
       ]
     }
   },
-
+    EdithMGernly: {
+    name: "Personelle File: Gernly, Edith M.",
+    layout: "Regula - Registry Of Sentient Beings - Admininstration",
+    fullEntry: "edith.html",
+    summary: {
+      region: "Regula System - Govornmental Entity",
+      inhabited: ["Regula III"],
+      notes: [
+        "RSB Personelle Entry. Level A Administrative Access Required",
+        "No Unauthorized Access",
+      ]
+    }
+  },
 
   // --- AURUM SYSTEM ---
   Aurum: {
