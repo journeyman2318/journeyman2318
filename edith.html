@@ -68,17 +68,24 @@
 
   const warning = document.getElementById("edith-warning");
 
-  if (attempts === 1) {
-    warning.innerText = "Do not refresh this page.";
-  } else if (attempts === 2) {
-    warning.innerText = "⚠️ Secondary access attempt detected. This incident has been logged.";
-  } else if (attempts === 3) {
-    warning.innerText = "⚠️ Repeated access attempts detected. Clearance verification pending.";
-  } else if (attempts === 4) {
-    warning.innerText = "🚫 Unauthorized persistence behavior noted. Please cease.";
-  } else if (attempts >= 5) {
-    warning.innerText = "🛑 Administrative lock engaged. A RSB clerk has been notified.";
-  }
+if (attempts === 1) {
+  warning.innerText = "Do not refresh this page.";
+} else if (attempts === 2) {
+  warning.innerText = "⚠️ Secondary access attempt detected. This incident has been logged.";
+} else if (attempts === 3) {
+  warning.innerText = "⚠️ Repeated access attempts detected. Clearance verification pending.";
+} else if (attempts === 4) {
+  warning.innerText = "🚫 Unauthorized persistence behavior noted. Please cease.";
+} else if (attempts === 5) {
+  warning.innerText = "🛑 Administrative lock engaged. A RSB clerk has been notified.";
+} else if (attempts === 8) {
+  warning.innerText = "📄 Form 88‑C: Explanation of Intent has been automatically filed on your behalf.";
+} else if (attempts === 10) {
+  warning.innerText = "👁️ Persistent access pattern detected. A supervisor has been alerted.";
+} else if (attempts === 11) {
+  window.location.href = "edith-override.html";
+}
+
 </script>
 </body>
 </html>
