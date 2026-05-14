@@ -53,7 +53,7 @@ const systems = {
     }
   },
 
-  // --- Registry ---
+   // --- Regula Sites ---
   RegistryOfSentientBeings: {
     name: "Registry Of Sentient Beings",
     layout: "Headquarters  Regula",
@@ -64,6 +64,32 @@ const systems = {
       notes: [
         "Offical Registry of Sentiend Beings in the Galaxy",
         "Don't make other plans for that day.",
+      ]
+    }
+  },
+    MuseumOfTempes: {
+    name: "Museum of Tempes",
+    layout: "Main Civic Area - Regula",
+    fullEntry: "museum.html",
+    summary: {
+      region: "Regula System - Govornmental Entity",
+      inhabited: ["Regula III"],
+      notes: [
+        "The Museum of Tempes.  Holders of the history of the Galaxy",
+        "Current Administrator - Anne Quarian .",
+      ]
+    }
+  },
+    CentralOrganizedGovornment: {
+    name: "Central Organized Govornment",
+    layout: "Main Civic Area - Regula",
+    fullEntry: "cog.html",
+    summary: {
+      region: "Regula System - Govornmental Entity",
+      inhabited: ["Regula III"],
+      notes: [
+        "The Defacto Govorning Entity for the Galaxy",
+        "Bureaucracy at its best!",
       ]
     }
   },
