@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>RSB - Self Help Main</title>
+
+    <script>
+        // VALID ID LIST
+        const VALID_IDS = [
+            "OP-00-A9F-3Q2",
+            "OP-00-A9F-3Q4",
+            "OP-00-A9F-3Q7",
+            "OP-00-A9F-3QA",
+            "OP-00-A9F-3QD"
+        ];
+
+        const SPECIAL_ID = "BR-02-AZ1-922";
+
+        function checkID() {
+            var id = document.getElementById("rsb_id").value;
+
+            if (id === SPECIAL_ID) {
+                parent.rsb_main.location = "validlorea.html";
+            } else if (VALID_IDS.includes(id)) {
+                parent.rsb_main.location = "valid.html";
+            } else {
+                parent.rsb_main.location = "invalid.html";
+            }
+        }
+
+        // Auto-dash formatting for pattern XX-00-XXX-XXX
+        function formatID(input) {
+            let v = input.value.replace(/-/g, "").toUpperCase();
+            let out = "";
+
+            if (v.length > 0) out += v.substring(0, 2);
+            if (v.length > 2) out += "-" + v.substring(2, 4);
+            if (v.length > 4) out += "-" + v.substring(4, 7);
+            if (v.length > 7) out += "-" + v.substring(7, 10);
+
+            input.value = out;
+        }
+    </script>
+
+</head>
+
+<body style="margin:0; padding:0; background-color:#C8C8C8; font-family:'Times New Roman',serif; font-size:12px;">
+
+    <div style="text-align:center; margin-top:20px;">
+        <div>Enter your ID number to continue</div>
+
+        <div style="margin-top:10px;">
+            <input type="text" id="rsb_id" size="50" onkeyup="formatID(this)">
+        </div>
+
+        <div style="margin-top:10px;">
+            <input type="button" value="ENTER" onclick="checkID()">
+        </div>
+    </div>
+
+</body>
+</html>
