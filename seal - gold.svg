@@ -7,8 +7,8 @@
        ========================= -->
   <style>
     :root {
-      --gold: #000000;
-      --stroke: #000000;
+      --gold: #D4AF37;
+      --stroke: #D4AF37;
       --bg: transparent;
     }
 
@@ -42,14 +42,14 @@
         M -53.6 45.0
         A 70 70 0 1 1 53.6 45.0
       "
-      stroke="#000000"
+      stroke="#D4AF37"
       stroke-width="4"
       stroke-linecap="round"
       fill="none" />
 
 <path
   d="M -50 47.0 L 50 47.0"
-  stroke="#000000"
+  stroke="#D4AF37"
   stroke-width="4"
   fill="none" />
 
@@ -66,7 +66,7 @@
 
 <path
   d="M -50 73.0 L 50 73.0"
-  stroke="#000000"
+  stroke="#D4AF37"
   stroke-width="4"
   fill="none" />
 

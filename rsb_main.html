@@ -1,5 +1,8 @@
 <!DOCTYPE html>
+
 <html>
+
+
 <head>
     <title>RSB - Self Help Main</title>
 
@@ -15,12 +18,12 @@
             "OP-00-A9F-3QD"
         ];
         const PROFILE_PAGES = {
-    "OP-00-A9F-3Q2": "id_op00a9f3q2.html",
-    "OP-00-A9F-3Q4": "id_op00a9f3q4.html",
-    "OP-00-A9F-3Q7": "id_op00a9f3q7.html",
-    "OP-00-A9F-3QA": "id_op00a9f3qa.html",
-    "OP-00-A9F-3QD": "id_op00a9f3qd.html",
-    "BR-02-AZ1-922": "validlorea.html" // still special
+    "OP-00-A9F-3Q2": "3q2.html",
+    "OP-00-A9F-3Q4": "3q4.html",
+    "OP-00-A9F-3Q7": "3q7.html",
+    "OP-00-A9F-3QA": "3qa.html",
+    "OP-00-A9F-3QD": "3qd.html",
+    "BR-02-AZ1-922": "922.html" // still special
 };
 
         const SPECIAL_ID = "BR-02-AZ1-922";
@@ -28,20 +31,26 @@
 function checkID() {
     var id = document.getElementById("rsb_id").value;
 
+    // PROFILE MODE OVERRIDES EVERYTHING
+    if (PROFILE_MODE && PROFILE_PAGES[id]) {
+        parent.rsb_main.location = PROFILE_PAGES[id];
+        return;
+    }
+
+    // SPECIAL ID (only used when NOT in profile mode)
     if (id === SPECIAL_ID) {
         parent.rsb_main.location = "validlorea.html";
-
-    } else if (VALID_IDS.includes(id)) {
-
-        if (PROFILE_MODE && PROFILE_PAGES[id]) {
-            parent.rsb_main.location = PROFILE_PAGES[id];
-        } else {
-            parent.rsb_main.location = "valid.html";
-        }
-
-    } else {
-        parent.rsb_main.location = "invalid.html";
+        return;
     }
+
+    // NORMAL VALID IDS
+    if (VALID_IDS.includes(id)) {
+        parent.rsb_main.location = "valid.html";
+        return;
+    }
+
+    // INVALID
+    parent.rsb_main.location = "invalid.html";
 }
 
 
@@ -61,7 +70,26 @@ function checkID() {
 
 </head>
 
-<body style="margin:0; padding:0; background-color:#C8C8C8; font-family:'Times New Roman',serif; font-size:12px;">
+<body style="margin:0; padding:0; background-color:#edeeee; font-family:'Times New Roman',serif; font-size:16px; display:flex; flex-direction:column; height:100vh;">
+
+<div class="section">
+    <div><strong>Welcome to the Registry of Sentient Beings Self‑Help Portal.</strong></div>
+    <br>
+    <div>
+        This portal provides limited access to identity records maintained by the RSB and the COG.
+        <br><br>
+        Please note:<br>
+        • Self‑Help is only available for <strong>active</strong> IDs.<br>
+        • <strong>Provisional</strong> and <strong>Recently Updated</strong> IDs are not eligible for online updates.<br>
+        • Most actions require <strong>in‑person verification</strong>.<br>
+        • No guarantee is made regarding the availability of online self‑help access.<br>
+        • Any unauthorized access attempts will be <strong>verified and logged</strong>.<br>
+        <br>
+        To proceed, enter your RSB Identification Number below.
+    </div>
+</div>
+
+
 
     <div style="text-align:center; margin-top:20px;">
         <div>Enter your ID number to continue</div>
@@ -74,6 +102,22 @@ function checkID() {
             <input type="button" value="ENTER" onclick="checkID()">
         </div>
     </div>
+
+
+<div style="flex: 1 0 auto;"></div>
+
+<div class="section" style="font-size: 11px; color: #333; margin-top: auto;">
+    <div><strong>RSB System Notices</strong></div>
+    <br>
+    <div>
+        • Information displayed on this portal may be incomplete, provisional, or pending verification.<br>
+        • The RSB and COG assume no liability for errors, delays, or service interruptions.<br>
+        • All access attempts are monitored, logged, and subject to review.<br>
+        • Unauthorized access is prohibited and may result in classification reassessment.<br>
+        • Data entered or viewed through this portal may be shared with authorized inter‑agency systems.<br>
+        • Online self‑help functions may be limited due to legacy system constraints.<br>
+    </div>
+</div>
 
 </body>
 </html>
