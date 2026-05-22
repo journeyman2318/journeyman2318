@@ -67,6 +67,19 @@ const systems = {
       ]
     }
   },
+    RegistryOfSentientBeingsSelfHelp: {
+    name: "Registry Of Sentient Beings Self Help Portal",
+    layout: "Headquarters  Regula",
+    fullEntry: "rsbmain.html",
+    summary: {
+      region: "Central Organized Govornment",
+      inhabited: ["Regula III"],
+      notes: [
+        "Offical Registry of Sentiend Beings Self Help Portal",
+        "Have your RSB-ID Ready",
+      ]
+    }
+  },
     MuseumOfTempes: {
     name: "Museum of Tempes",
     layout: "Main Civic Area - Regula",
