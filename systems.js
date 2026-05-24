@@ -107,7 +107,7 @@ const systems = {
     }
   },
 
-  /* REMOVE THIS TO ACTIVATE EDITH FILE
+ 
     EdithMGernly: {
     name: "Personelle File: Gernly, Edith M.",
     layout: "Regula - Registry Of Sentient Beings - Admininstration",
@@ -121,7 +121,7 @@ const systems = {
       ]
     }
   },
-  REMOVE THIS TO ACTIVATE EDITH FILE*/ 
+  
 
   // --- AURUM SYSTEM ---
   Aurum: {
